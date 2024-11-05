@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/code:ro
+    command: poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_PASSWORD=1234
+      - DATABASE_NAME=socialapi
+      - DATABASE_USERNAME=postgres
+      - SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=300
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    container_name: PostgresCont
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=socialapi
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_db:
+

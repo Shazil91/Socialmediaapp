@@ -1,8 +1,8 @@
-"""add content column to posts table
+"""add column to posts table
 
-Revision ID: 3f175e5db992
-Revises: da49d06357dd
-Create Date: 2024-10-27 23:16:53.715620
+Revision ID: acdff21f34c9
+Revises: 1c5db8258060
+Create Date: 2024-11-05 04:17:44.568779
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '3f175e5db992'
-down_revision: Union[str, None] = 'da49d06357dd'
+revision: str = 'acdff21f34c9'
+down_revision: Union[str, None] = '1c5db8258060'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

@@ -1,0 +1,36 @@
+name: Deploy Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'  # Use the Python version your project requires
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run pytest
+
+      - name: Deploy (if required)
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          # Add deployment commands or scripts here
+          echo "Deploying the updated version..."

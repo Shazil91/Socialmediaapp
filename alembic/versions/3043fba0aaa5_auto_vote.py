@@ -1,8 +1,8 @@
 """auto-vote
 
-Revision ID: ce111ca29ff3
-Revises: 286e13afc7db
-Create Date: 2024-10-28 21:51:59.335844
+Revision ID: 3043fba0aaa5
+Revises: 436ce3931830
+Create Date: 2024-11-05 04:40:37.578680
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'ce111ca29ff3'
-down_revision: Union[str, None] = '286e13afc7db'
+revision: str = '3043fba0aaa5'
+down_revision: Union[str, None] = '436ce3931830'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
