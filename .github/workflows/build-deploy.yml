@@ -9,9 +9,7 @@ on:
       - main
 
 jobs:
-  job1:
-    # environment:
-    # name: testing
+  build:
     runs-on: ubuntu-latest
 
     services:
