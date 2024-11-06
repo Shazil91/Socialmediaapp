@@ -10,8 +10,8 @@ on:
 
 jobs:
   job1:
-    environment:
-    name: testing
+    # environment:
+    # name: testing
     runs-on: ubuntu-latest
 
     services:
