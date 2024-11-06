@@ -1,36 +1,40 @@
-name: Deploy Project
+name: Deploy Fastapi Project
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12'  # Use the Python version your project requires
-
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          python-version: '3.12'
 
       - name: Install dependencies
-        run: poetry install
-
-      - name: Run tests
-        run: poetry run pytest
-
-      - name: Deploy (if required)
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          # Add deployment commands or scripts here
-          echo "Deploying the updated version..."
+          pip install poetry
+          poetry install
+
+      # - name: Run tests
+      #   env:
+      #     DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
+      #     DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+      #     DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      #     DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+      #     DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #     ALGORITHM: ${{ secrets.ALGORITHM }}
+      #     ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      #   run: |
+      #     poetry run pytest
